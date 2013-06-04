@@ -25,6 +25,13 @@ class ArrayTranslator implements Translator {
   }
 
   /**
+   * @return string
+   */
+  public function trans($id, Array $parameters = array(), $domain = NULL, $locale = NULL) {
+    return $this->translator->trans($id, $parameters, $domain, $locale);
+  }
+
+  /**
    * @param string en or en_EN is okay
    */
   public function setLocale($locale) {
@@ -33,14 +40,17 @@ class ArrayTranslator implements Translator {
   }
 
   /**
+   * @return string
+   */
+  public function getLocale() {
+    return $this->translator->getLocale();
+  }
+
+  /**
    * @param string an array of locales that are used if no translation is avaible
    */
   public function setFallbackLocales(Array $locales) {
     $this->translator->setFallbackLocales($locales);
     return $this;
-  }
-
-  public function trans($id, Array $parameters = array(), $domain = NULL, $locale = NULL) {
-    return $this->translator->trans($id, $parameters, $domain, $locale);
   }
 }

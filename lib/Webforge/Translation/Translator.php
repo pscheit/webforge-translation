@@ -7,6 +7,7 @@ interface Translator {
   public function trans($id, Array $parameters = array(), $domain = NULL, $locale = NULL);
 
   public function setLocale($locale);
+  public function getLocale();
 
   public function setFallbackLocales(Array $locales);
 
