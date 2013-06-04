@@ -2,7 +2,7 @@
 
 namespace Webforge\Translation;
 
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\Translator as SymfonyTranslator;
 use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 
@@ -14,7 +14,7 @@ class ArrayTranslator implements Translator {
   protected $translator;
 
   public function __construct($locale, Array $i18nTranslations, Array $fallbackLocales = NULL) {
-    $this->translator = new Translator($locale, new MessageSelector());
+    $this->translator = new SymfonyTranslator($locale, new MessageSelector());
     $this->setFallbackLocales($fallbackLocales ?: array('en'));
     
     $this->translator->addLoader('array', new ArrayLoader());
