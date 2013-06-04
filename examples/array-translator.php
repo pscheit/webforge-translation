@@ -1,21 +1,3 @@
-# webforge-translation
-
-Wrapper around the symfony translator for standalone use
-
-## installation
-Use [Composer](http://getcomposer.org) to install.
-```
-composer require -v --prefer-source webforge/testplate:dev-master
-```
-
-to run the tests use:
-```
-phpunit
-```
-
-## usage
-
-```php
 <?php
 
 use Webforge\Translation\ArrayTranslator;
@@ -38,4 +20,3 @@ print $translator->trans('how')."\n"; // How are you?
 
 $translator->setLocale('en');
 print $translator->trans('hello')."\n"; // Hello World!
-```
