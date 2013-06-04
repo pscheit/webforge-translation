@@ -1,0 +1,24 @@
+{
+    "name": "webforge/translation",
+    "description": "Translation component based on symfony/translation",
+    "require": {
+        "symfony/translation": "2.3.*@stable"
+    },
+    "require-dev": {
+        "webforge/testplate": "1.2.*@dev"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Philipp Scheit",
+            "email": "p.scheit@ps-webforge.com"
+        }
+    ],
+    "minimum-stability": "dev",
+
+    "autoload": {
+        "psr-0": {
+            "Webforge\\Translation": ["lib/", "tests/"]
+        }
+    }
+}
