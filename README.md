@@ -5,7 +5,7 @@ Wrapper around the symfony translator for standalone use
 ## installation
 Use [Composer](http://getcomposer.org) to install.
 ```
-composer require -v --prefer-source webforge/testplate:dev-master
+composer require -v --prefer-source webforge/translation:dev-master
 ```
 
 to run the tests use:
@@ -39,3 +39,7 @@ print $translator->trans('how')."\n"; // How are you?
 $translator->setLocale('en');
 print $translator->trans('hello')."\n"; // Hello World!
 ```
+
+### dependencies
+
+  * symfony/translation 2.3
