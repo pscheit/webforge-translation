@@ -8,6 +8,6 @@ interface Translator {
 
   public function setLocale($locale);
 
-  public function setFallbackLocales(Array $locales) {
+  public function setFallbackLocales(Array $locales);
 
 }
