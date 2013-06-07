@@ -6,14 +6,14 @@ use Symfony\Component\Translation\Translator as SymfonyTranslator;
 use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 
-class ArrayTranslator implements Translator {
+class ResourceTranslator implements Translator {
 
   /**
    * @var Symfony\Component\Translation\Translator
    */
   protected $translator;
 
-  public function __construct($locale, Array $i18nTranslations, Array $fallbackLocales = NULL) {
+  public function __construct($locale, Array $i18nTranslations = array(), Array $fallbackLocales = NULL) {
     $this->translator = new SymfonyTranslator($locale, new MessageSelector());
     $this->setFallbackLocales($fallbackLocales ?: array('en'));
     
