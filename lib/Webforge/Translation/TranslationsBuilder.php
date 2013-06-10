@@ -13,6 +13,11 @@ class TranslationsBuilder {
    */
   protected $locale;
 
+  /**
+   * @var string the current order of locales for trans()
+   */
+  protected $locales;
+
   public static function create($domain = NULL) {
     return new static($domain);
   }
@@ -22,13 +27,26 @@ class TranslationsBuilder {
   }
 
   /**
-   * Sets the current locale for the next trans()
+   * Sets the single locale for the next trans()
    * 
    * @param string $locale
    * @chainable
    */
   public function locale($locale) {
+    $this->locales = NULL;
     $this->locale = $locale;
+    return $this;
+  }
+
+  /**
+   *  Sets a order of two or more locales for the next trans
+   * 
+   * ->locales('de', 'en')
+   *   ->trans('hello', 'Hallo Welt', 'Hello World')
+   */
+  public function locales($locale1, $locale2, $localeN) {
+    $this->locale = NULL;
+    $this->locales = func_get_args();
     return $this;
   }
 
@@ -40,7 +58,20 @@ class TranslationsBuilder {
    * @chainable
    */
   public function trans($key, $translation) {
-    $this->translations[$this->locale][$key] = $translation;
+    if (isset($this->locales)) {
+      $args = func_get_args();
+      array_shift($args);
+      foreach ($this->locales as $locale) {
+        $this->translations[$locale][$key] = array_shift($args);
+      }
+
+    } elseif(isset($this->locale)) {
+      $this->translations[$this->locale][$key] = $translation;
+    
+    } else {
+      throw new \LogicException('Use locale() or locales(). After that use trans().');
+    }
+
     return $this;
   }
 
