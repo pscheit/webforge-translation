@@ -2,16 +2,55 @@
 
 namespace Webforge\Translation;
 
-interface ResourceTranslator extends Translator {
+use Symfony\Component\Translation\Translator as SymfonyTranslator;
+use Symfony\Component\Translation\MessageSelector;
+use Symfony\Component\Translation\Loader\ArrayLoader;
 
- /**
-  * Adds another Resource to translations for this translator
-  *
-  * @param string $format The name of the loader (@see addLoader())
-  * @param mixed $resource a name mostly related to the Loader (e.g. Filename for filelaoder)
-  * @param string $locale locale of the resource
-  * @param string $domain domain of the resource
-  */
- public function addResource($format, $resource, $locale, $domain = null);
+class ResourceTranslator implements Translator {
 
+  /**
+   * @var Symfony\Component\Translation\Translator
+   */
+  protected $translator;
+
+  public function __construct($locale, Array $i18nTranslations = array(), Array $fallbackLocales = NULL) {
+    $this->translator = new SymfonyTranslator($locale, new MessageSelector());
+    $this->setFallbackLocales($fallbackLocales ?: array('en'));
+    
+    $this->translator->addLoader('array', new ArrayLoader());
+
+    foreach ($i18nTranslations as $locale => $translations) {
+      $this->translator->addResource('array', $translations, $locale);
+    }
+  }
+
+  /**
+   * @return string
+   */
+  public function trans($id, Array $parameters = array(), $domain = NULL, $locale = NULL) {
+    return $this->translator->trans($id, $parameters, $domain, $locale);
+  }
+
+  /**
+   * @param string en or en_EN is okay
+   */
+  public function setLocale($locale) {
+    $this->translator->setLocale($locale);
+    return $this;
+  }
+
+  /**
+   * @return string
+   */
+  public function getLocale() {
+    return $this->translator->getLocale();
+  }
+
+  /**
+   * @param string an array of locales that are used if no translation is avaible
+   */
+  public function setFallbackLocales(Array $locales) {
+    $this->translator->setFallbackLocales($locales);
+    return $this;
+  }
 }
