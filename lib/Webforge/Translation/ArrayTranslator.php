@@ -7,6 +7,7 @@ use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 use Symfony\Component\Translation\Loader\PhpFileLoader;
 use Webforge\Common\System\Dir;
+use Webforge\Common\System\File;
 
 class ArrayTranslator implements ResourceTranslator {
 
@@ -71,7 +72,18 @@ class ArrayTranslator implements ResourceTranslator {
   }
 
   public function addResource($format, $resource, $locale, $domain = null) {
-    $this->translator->addResource($format, (string) $resource, $locale, $domain);
+    if ($resource instanceof File) {
+      $resource = (string) $resource;
+    }
+    
+    $this->translator->addResource($format, $resource, $locale, $domain);
+    return $this;
+  }
+
+  public function addDomainTranslations(Array $i18nTranslations, $domain) {
+    foreach ($i18nTranslations as $locale => $translations) {
+      $this->translator->addResource('array', $translations, $locale, $domain);
+    }
     return $this;
   }
 }

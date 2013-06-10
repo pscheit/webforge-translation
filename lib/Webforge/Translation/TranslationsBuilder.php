@@ -81,4 +81,8 @@ class TranslationsBuilder {
   public function build() {
     return $this->translations;
   }
+
+  public function getDomain() {
+    return $this->domain;
+  }
 }
