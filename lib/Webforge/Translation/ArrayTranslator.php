@@ -6,7 +6,7 @@ use Symfony\Component\Translation\Translator as SymfonyTranslator;
 use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Loader\ArrayLoader;
 
-class ArrayTranslator implements Translator {
+class ArrayTranslator implements ResourceTranslator {
 
   /**
    * @var Symfony\Component\Translation\Translator
@@ -52,5 +52,10 @@ class ArrayTranslator implements Translator {
   public function setFallbackLocales(Array $locales) {
     $this->translator->setFallbackLocales($locales);
     return $this;
+  }
+
+
+  public function addResource() {
+
   }
 }
