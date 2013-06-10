@@ -1,5 +1,6 @@
 <?php
 
 return Array(
-  'click' => 'Click'
+  'click' => 'Click',
+  'test.others-de' => 'content: test.others-de'
 );

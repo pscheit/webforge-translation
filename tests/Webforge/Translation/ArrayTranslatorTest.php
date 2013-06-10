@@ -2,19 +2,20 @@
 
 namespace Webforge\Translation;
 
-class ResourceTranslatorTest extends TranslationsTestCase {
+class ArrayTranslatorTest extends TranslationsTestCase {
 
   public function setUp() {
-    $this->chainClass = 'Webforge\\Translation\\ResourceTranslator';
+    $this->chainClass = 'Webforge\\Translation\\ArrayTranslator';
     parent::setUp();
 
-    $this->translator = new ResourceTranslator(
+    $this->translator = new ArrayTranslator(
       'de_DE',
       array(
         'de'=>$this->translationsDe,
         'en'=>$this->translationsEn
       )
     );
+  }
 
   /**
    * @dataProvider provideTranslationsDe
@@ -54,7 +55,30 @@ class ResourceTranslatorTest extends TranslationsTestCase {
     );
   }
 
-  public function testCanGetAnotherResourceAdded() {
+  public function testTranslatorCanBeAddedAPhpFileResource() {
+    $this->translator->addResource(
+      'php', $this->getFile('translations/others.en.php'), 'de', 'others'
+    );
 
+    $this->assertTestTranslation('others', 'en');
+  }
+
+  public function testCanGetResourceDirectoryAdded_WhereResourcesAreLoadedFromFiles_WithDomains() {
+    $this->translator->addResourceDirectory(
+      $this->getTestDirectory('translations/')
+    );
+
+    $this->assertTestTranslation('messages', 'de');
+    $this->assertTestTranslation('messages', 'en');
+    $this->assertTestTranslation('others', 'de');
+    $this->assertTestTranslation('others', 'en');
+  }
+
+  protected function assertTestTranslation($domain, $locale) {
+    $this->assertEquals(
+      'content: '.'test.'.$domain.'-'.$locale,
+      $this->translator->trans('test.'.$domain.'-'.$locale, array(), $domain),
+      'the key: "test.'.$domain.'-'.$locale.'" is not loaded correctly'
+    );
   }
 }

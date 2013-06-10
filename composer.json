@@ -3,7 +3,8 @@
     "description": "Translation component based on symfony/translation",
     "require": {
         "symfony/translation": "2.3.*@stable",
-        "symfony/finder": "2.3.*@stable"
+        "symfony/finder": "2.3.*@stable",
+        "symfony/config": "2.3.*@stable"
     },
     "require-dev": {
         "webforge/testplate": "1.2.*@dev"
