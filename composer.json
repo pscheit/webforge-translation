@@ -7,7 +7,8 @@
         "symfony/config": "2.3.*@stable"
     },
     "require-dev": {
-        "webforge/testplate": "1.2.*@dev"
+        "webforge/testplate": "1.2.*@dev",
+        "liip/rmt": "0.9.*"
     },
     "license": "MIT",
     "authors": [
