@@ -8,7 +8,8 @@
     },
     "require-dev": {
         "webforge/testplate": "1.2.*@dev",
-        "liip/rmt": "0.9.*"
+        "liip/rmt": "0.9.*",
+        "satooshi/php-coveralls": "dev-master"
     },
     "license": "MIT",
     "authors": [
