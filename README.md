@@ -1,5 +1,8 @@
 # webforge-translation
 
+
+[![Coverage Status](https://coveralls.io/repos/webforge-labs/webforge-translation/badge.png?branch=master)](https://coveralls.io/r/webforge-labs/webforge-translation?branch=master)
+
 Wrapper around the symfony translator for standalone use
 
 ## installation
